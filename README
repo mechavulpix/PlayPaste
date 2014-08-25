@@ -1,0 +1,6 @@
+PlayPaste is a simple, un-authenticated pastebin-like application. There are
+plenty of these types of solutions available online currently, but I wrote one
+anyway as an introduction to learning/using the Play Framework.
+
+If you're familiar with play, setting this up on your server to host whatever
+silly pastes that you don't want on pastebin should be simple.
