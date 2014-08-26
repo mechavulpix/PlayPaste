@@ -80,25 +80,27 @@ public class Paste extends Model {
         // Attempt to look up the paste
         requestedPaste = Paste.find.byId(pasteId);
         
-        // If we have a null key, then check that the key for this paste is null
-        if ( pasteKey == null && requestedPaste.key != null ) {
-            // if not, pretend we didn't find a paste
-            requestedPaste = null;
-        }
-        
-        // Otherwise, we were given a pasteKey
-        else {
-            // Now, if we have a pasteKey, but this paste doesn't, we'll just
-            // ignore the extra info
-            
-            // If this paste does have a key...
-            if ( requestedPaste.key != null &&
-                    !requestedPaste.key.equals(pasteKey) ) {
-                // ...and the keys don't match, pretend the paste doesn't exist
+        // If we found a paste, determine if we can load is
+        if (requestedPaste != null) {
+            // If we have a null key, check that the key for this paste is null
+            if ( pasteKey == null && requestedPaste.key != null ) {
+                // if not, pretend we didn't find a paste
                 requestedPaste = null;
             }
+            
+            // Otherwise, we were given a pasteKey
+            else {
+                // If we have a pasteKey, but this paste doesn't, we'll just
+                // ignore the extra info
+                
+                // If this paste does have a key...
+                if ( requestedPaste.key != null &&
+                        !requestedPaste.key.equals(pasteKey) ) {
+                    // ...and the keys don't match, pretend there's no paste
+                    requestedPaste = null;
+                }
+            }
         }
-        
         return requestedPaste;
     }
     
