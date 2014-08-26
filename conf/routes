@@ -15,3 +15,6 @@ GET     /$id<[a-z]{8}>/$key<[a-z]{8}>   controllers.Application.showPaste(id: St
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                   controllers.Assets.at(path="/public", file)
+
+# Map for a generic error message
+GET     /error                          controllers.Application.error()

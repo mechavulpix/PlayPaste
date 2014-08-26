@@ -15,6 +15,11 @@ public class Application extends Controller {
         return ok(index.render());
     }
     
+    public static Result error() {
+        response().setContentType("text/html");
+        return notFound(error.render());
+    }
+    
     public static Result submit() {
         Result pageContent = null;
         
