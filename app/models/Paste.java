@@ -85,11 +85,18 @@ public class Paste extends Model {
             // if not, pretend we didn't find a paste
             requestedPaste = null;
         }
+        
+        // Otherwise, we were given a pasteKey
+        else {
+            // Now, if we have a pasteKey, but this paste doesn't, we'll just
+            // ignore the extra info
             
-        // otherwise, make sure that the keys match
-        else if ( pasteKey != null && !requestedPaste.key.equals(pasteKey)) {
-            // if they keys don't match, pretend like the paste doesn't exist
-            requestedPaste = null;
+            // If this paste does have a key...
+            if ( requestedPaste.key != null &&
+                    !requestedPaste.key.equals(pasteKey) ) {
+                // ...and the keys don't match, pretend the paste doesn't exist
+                requestedPaste = null;
+            }
         }
         
         return requestedPaste;
