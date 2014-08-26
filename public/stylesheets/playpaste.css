@@ -27,6 +27,16 @@ div.paste-box {
     margin-bottom:20px;
 }
 
+div.not-found {
+    position:absolute;
+    width:100%;
+    margin-top:120px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:20px;
+    text-align:center;
+}
+
 div.paste-buttons {
     margin:7px;
 }

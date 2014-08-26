@@ -20,6 +20,11 @@ public class Application extends Controller {
         return notFound(error.render());
     }
     
+    public static Result errorUrl(String url) {
+        response().setContentType("text/html");
+        return notFound(error.render());
+    }
+    
     public static Result submit() {
         Result pageContent = null;
         
@@ -59,7 +64,7 @@ public class Application extends Controller {
         Paste aPaste = Paste.getPaste(pasteId, secKey);
         
         if ( aPaste == null )
-            {pageContent = redirect(controllers.routes.Application.index());}
+            {pageContent = notFound(error.render());}
         else
             {pageContent = ok(paste.render(aPaste.pasteData));}
         
