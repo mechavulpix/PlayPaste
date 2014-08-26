@@ -13,6 +13,7 @@ import com.avaje.ebean.config.GlobalProperties;
 @Entity 
 public class Paste extends Model {
     
+    // Object Field Declarations
     @Id
     @Column(columnDefinition = "CHAR(8)")
     public String id;
@@ -24,6 +25,7 @@ public class Paste extends Model {
     @Column(columnDefinition = "CHAR(8)")
     public String key;
     
+    // Ebean Object Finder
     public static Finder<String,Paste> find = new Finder<String,Paste> (
         String.class, Paste.class
     );
@@ -40,9 +42,16 @@ public class Paste extends Model {
     public Paste(String pasteText, boolean isSecure) {
         // Generate an Id for the paste
         this.id = genKey();
+        
+        // Make sure this is a new Id
+        while ( idExists(this.id) ) {
+            this.id = genKey();
+        }
+        
+        // Store the paste we received
         this.pasteData = pasteText;
         
-        // If this paste isSecure, then we need to generate a key for it
+        // If this paste isSecure, then we need to generate a secure key for it
         if ( isSecure ) {
             this.key = genKey();
         }
@@ -52,10 +61,9 @@ public class Paste extends Model {
             this.key = null;
         }
         
+        // Save our current Paste
         Ebean.save(this);
     }
-    
-    
     
     
     /**
@@ -105,4 +113,15 @@ public class Paste extends Model {
         return key.toString();
     }
     
+    /**
+     *  Internal function to check and see if a given id exists
+     *
+     *  While this task is somewhat trivial, I think it still merits it's own
+     *  internal function for readability and simplicity.
+     *
+     *  @param id This is the id we are checking to see if it exists
+    */
+    private boolean idExists(String id) {
+        return ( Paste.find.byId(id) != null );
+    }
 }
