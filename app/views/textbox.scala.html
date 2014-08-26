@@ -1,7 +1,9 @@
-<form action='/submit' method='post'>
-    <textarea name='paste' cols="80" rows="24"></textarea>
-    <br />
-    <input type='checkbox' name='secure'>Protect this paste with a key!
-    <br />
-    <input type='submit' value='Paste It!'>
-</form>
+<div class="paste-box">
+    <form action='/submit' method='post'>
+        <textarea name='paste' cols="80" rows="24"></textarea>
+        <div class='paste-buttons'>
+            <input type='submit' value='Paste It!'>
+            <input type='checkbox' name='secure'>Protect this paste with a key!
+        </div>
+    </form>
+</div>
